@@ -1,0 +1,1 @@
+export function PreferenceSwitch({label,description,checked,onChange}:{label:string;description:string;checked:boolean;onChange:()=>void}){return <button className="preference-row" role="switch" aria-checked={checked} onClick={onChange}><span><strong>{label}</strong><small>{description}</small></span><span className="switch-track" aria-hidden="true"><span/></span></button>}
