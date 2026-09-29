@@ -1,0 +1,2 @@
+import type { HomeCopy } from '@/lib/content';
+export function QuoteSection({copy}:{copy:HomeCopy}){return <aside className="quote-section" aria-label="Words of Dr. Ambedkar"><span className="quote-mark" aria-hidden="true">“</span><blockquote><p>{copy.quote}</p><footer><cite>{copy.quoteName}</cite><span>{copy.quoteSource}</span></footer></blockquote><div className="quote-decoration" aria-hidden="true">अ</div></aside>}
