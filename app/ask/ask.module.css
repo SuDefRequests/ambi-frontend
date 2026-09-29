@@ -1,0 +1,178 @@
+/* Ask-only artwork and controls. Shared archive and narration styles stay intact. */
+.page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: hidden;
+  color: #302b26;
+  background: #f3ebde;
+}
+.artwork {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: url('/images/ask-archive-backdrop.png') center top / cover no-repeat;
+}
+.page[data-reading='true'] .artwork { opacity: .2; }
+.shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(100% - 80px, 70.5vw, 1320px);
+  min-height: 100svh;
+  margin: auto;
+  padding-bottom: 26px;
+}
+.experience {
+  width: min(100%, clamp(830px, 49vw, 940px));
+  flex: 1;
+  margin: 0 auto;
+  padding: clamp(52px, 7.5vh, 90px) 0 50px;
+}
+.reading { width: min(100%, 1152px); }
+.hero { text-align: center; margin-bottom: 44px; }
+.title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(56px, 5.1vw, 92px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -.045em;
+}
+.description {
+  max-width: 620px;
+  margin: 18px auto 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #706353;
+}
+.features {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  max-width: 85%;
+  margin: 38px auto 0;
+}
+.features > div > div:first-child {
+  width: 58px;
+  height: 58px;
+  border-radius: 22px;
+  background: #fbf4e780;
+  border-color: #c4a57b55;
+  color: #805926;
+  box-shadow: 0 2px 2px #78562912, inset 0 1px #fff8;
+}
+.features p:first-child { font-family: Georgia, serif; font-size: 14px; font-weight: 400; }
+.features p:last-child { font-size: 11px; color: #7c6b59; }
+.askBox {
+  border: 1px solid #b99565;
+  border-radius: 26px;
+  background: #fcf7eeeb;
+  padding: 18px 24px;
+  box-shadow: 0 16px 36px #72502226, inset 0 0 0 2px #fff9;
+  transition: border-color .2s, box-shadow .2s;
+}
+.askBox:focus-within { border-color: #805926; box-shadow: 0 16px 36px #72502226, 0 0 0 3px #a37d4430; }
+.inputRow { display: flex; align-items: center; gap: 18px; }
+.spark { color: #885d2c; display: grid; place-items: center; }
+.form textarea {
+  min-width: 0;
+  min-height: 64px;
+  padding: 17px 0;
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 30px;
+}
+.form textarea::placeholder { color: #8d7961; }
+.form button {
+  align-self: center;
+  background: #885e2d;
+  color: #fffaf1;
+  box-shadow: 0 3px 8px #74512720;
+}
+.form button:disabled { opacity: .65; }
+.form button:hover:not(:disabled) { background: #71481f; }
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 85%;
+  margin: auto;
+}
+.suggestion {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-height: 80px;
+  padding: 12px 22px;
+  border: 1px solid #bfa98938;
+  border-radius: 28px;
+  background: #f6eddfdf;
+  box-shadow: 0 2px 3px #60452514, inset 0 1px #fff8;
+  color: #40382f;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.suggestionIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #805926;
+  background: #fbf4e75c;
+}
+.suggestion:hover { transform: translateY(-3px); background: #fff8ed; border-color: #b9956599; box-shadow: 0 8px 20px #6045251c; }
+.suggestion:active { transform: translateY(1px); }
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border-top: 1px solid #a7896059;
+  padding-top: 22px;
+}
+.footer p { color: #7e6a52; letter-spacing: .09em; }
+@media (min-width: 1600px) {
+  .experience { padding-top: clamp(70px, 7.4vh, 84px); }
+  .hero { margin-bottom: 42px; }
+  .features { margin-top: 32px; }
+}
+@media (max-width: 1100px) {
+  .shell { width: calc(100% - 64px); }
+  .features, .suggestions { max-width: 100%; }
+  .artwork { opacity: .55; background-size: auto 100svh; }
+  .experience { max-width: 800px; }
+  .features { gap: 14px; }
+  .features > div { gap: 8px; }
+  .features p:last-child { max-width: 135px; }
+}
+@media (max-width: 640px) {
+  .shell { width: calc(100% - 32px); padding-bottom: 22px; }
+  .artwork { background-size: auto 850px; opacity: .25; }
+  .experience { padding: 38px 0 36px; }
+  .hero { margin-bottom: 28px; }
+  .title { font-size: clamp(43px, 11vw, 64px); }
+  .description { margin-top: 18px; font-size: 16px; max-width: 350px; }
+  .features { margin-top: 26px; gap: 8px; align-items: flex-start; }
+  .features > div { flex: 1; flex-direction: column; text-align: center; gap: 10px; }
+  .features > div > div:first-child { width: 44px; height: 44px; border-radius: 16px; }
+  .features p:first-child { font-size: 12px; line-height: 1.4; }
+  .features p:last-child { display: none; }
+  .askBox { padding: 12px; border-radius: 22px; }
+  .inputRow { gap: 10px; }
+  .spark svg { width: 21px; }
+  .form textarea { font-size: 15px; line-height: 24px; padding: 8px 0; min-height: 72px; }
+  .form button { width: 44px; height: 44px; }
+  .suggestions { grid-template-columns: 1fr; gap: 10px; }
+  .suggestion { min-height: 72px; padding: 10px 16px; border-radius: 23px; gap: 12px; }
+  .footer p { max-width: 300px; line-height: 1.7; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::before, .page *::after { transition: none !important; }
+  .suggestion:hover { transform: none; }
+}
