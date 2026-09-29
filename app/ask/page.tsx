@@ -6,6 +6,7 @@ import { Narration } from '@/components/archive/ReaderNarration';
 import styles from './narration.module.css';
 import visual from './ask.module.css';
 import { ArrowUp, ArrowRight, BookOpen, FileText, GraduationCap, Layers, Scale, Search, Sparkles, Users } from 'lucide-react';
+import { useVisit } from '@/components/archive/VisitPreferences';
 
 type Source = {
     passage_id: string;
@@ -73,7 +74,7 @@ function renderAnswer(answer: string) {
 
 export default function AskArchivePage() {
     const [question, setQuestion] = useState('');
-    const [language, setLanguage] = useState<'en' | 'hi' | 'mr'>('en');
+    const { language, setLanguage } = useVisit();
     const [answer, setAnswer] = useState<AskResponse | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
