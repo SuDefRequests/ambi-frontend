@@ -1,0 +1,5 @@
+import Image from 'next/image';
+import { SearchBar } from './SearchBar';
+import { TopicChips } from './TopicChips';
+import type { HomeCopy, Navigate } from '@/lib/content';
+export function Hero({copy,query,onQuery,onNavigate}:{copy:HomeCopy;query:string;onQuery:(query:string)=>void;onNavigate:Navigate}){return <section className="hero" aria-labelledby="hero-title"><figure className="hero-portrait"><Image src="/images/ambedkar-1950.jpg" alt="Dr. B. R. Ambedkar seated at his desk, 1950" fill priority sizes="(max-width: 800px) 50vw, 36vw"/><figcaption><span>DR. B. R. AMBEDKAR</span><span>1891 — 1956</span></figcaption></figure><div className="hero-editorial"><p className="eyebrow hero-eyebrow">{copy.eyebrow}</p><h1 id="hero-title">{copy.headline}<em>{copy.headlineEm}</em></h1><p className="hero-description">{copy.description}</p><div className="hero-search"><SearchBar query={query} onQuery={onQuery} onSearch={query=>onNavigate({kind:'search',query})} copy={copy}/><TopicChips copy={copy} onNavigate={onNavigate}/></div></div><span className="hero-margin-note" aria-hidden="true">THE LIFE · THE WORK · THE LEGACY</span></section>}

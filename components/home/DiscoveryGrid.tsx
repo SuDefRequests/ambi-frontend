@@ -1,0 +1,3 @@
+import { exhibits, type HomeCopy, type Navigate } from '@/lib/content';
+import { DiscoveryCard } from './DiscoveryCard';
+export function DiscoveryGrid({copy,onNavigate}:{copy:HomeCopy;onNavigate:Navigate}){return <section className="discovery-section" aria-labelledby="discovery-title"><div className="section-heading"><h2 id="discovery-title" className="eyebrow">{copy.explore}</h2><span>{copy.exploreNote}</span><div className="heading-rule"/><span className="exhibit-count" aria-hidden="true">01 — 06</span></div><div className="discovery-grid">{exhibits.map(exhibit=><DiscoveryCard key={exhibit.id} exhibit={exhibit} copy={copy} onNavigate={onNavigate}/>)}</div></section>}
