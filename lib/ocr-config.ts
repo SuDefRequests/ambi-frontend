@@ -24,7 +24,7 @@ export const OCR_ACCEPT_ATTR = OCR_FILE_TYPES.map((t) => t.accept).join(',');
 // The backend declares no upper bound on POST /upload. This is a
 // frontend-only safety guard so a multi-hundred-MB scan doesn't hang
 // the kiosk tab; raise it if the institution's real scans run larger.
-export const OCR_MAX_FILE_BYTES = 25 * 1024 * 1024; // 25 MB
+export const OCR_MAX_FILE_BYTES = 100 * 1024 * 1024; // 100 MB
 
 export function extensionOf(filename: string): string {
   const dot = filename.lastIndexOf('.');

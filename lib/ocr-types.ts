@@ -1,44 +1,28 @@
-// Types for the institutional Archive Digitization (OCR) workflow.
-//
-// IMPORTANT: OcrUploadResponse mirrors the *actual* backend response
-// from POST /upload (see app/api.py in the backend project) — it does
-// NOT include page-level text, confidence, or a document id, because
-// the live endpoint does not return them. Do not add fields here that
-// the backend doesn't send; see OCR-DESK-NOTES.md for the full gap list.
-
 export type OcrLanguage = 'en' | 'hi' | 'mr';
 
-export const OCR_LANGUAGES: { id: OcrLanguage; label: string }[] = [
+export type OcrPage = {
+  page: number;
+  text: string;
+  confidence?: number | null;
+};
+
+export const OCR_LANGUAGES = [
   { id: 'en', label: 'English' },
   { id: 'hi', label: 'Hindi' },
   { id: 'mr', label: 'Marathi' },
-];
+] as const;
 
-/** The real, current shape of a successful POST /upload response. */
-export type OcrUploadResponse = {
-  status: string;
+
+export type OcrPreviewResponse = {
+  document_id: string;
   filename: string;
-  chunks_added: number;
-  message: string;
+  sha256: string;
+  language: string;
+  processing_timestamp: string;
+  status: string;
+  pages: OcrPage[];
 };
 
-/** The real shape of a FastAPI HTTPException(detail=...) error body. */
-export type OcrErrorBody = {
-  detail?: { code?: string; message?: string } | string;
-};
-
-export type OcrWorkflowStep =
-  | 'upload'
-  | 'processing'
-  | 'review'
-  | 'metadata'
-  | 'final-preview'
-  | 'success';
-
-/** Purely local, in-browser record-keeping. Nothing here is sent to the
- * backend today — there is no metadata field on POST /upload. Kept
- * separate from OcrUploadResponse so it's never confused with what the
- * archive service actually stored. See OCR-DESK-NOTES.md. */
 export type OcrMetadataDraft = {
   title: string;
   description: string;
@@ -51,14 +35,35 @@ export type OcrMetadataDraft = {
   notes: string;
 };
 
-export const EMPTY_METADATA_DRAFT: OcrMetadataDraft = {
-  title: '',
-  description: '',
-  creator: '',
-  date: '',
-  language: 'en',
-  documentType: '',
-  collection: '',
-  source: '',
-  notes: '',
+export type OcrIngestRequest = {
+  document_id: string;
+  metadata: {
+    title: string | null;
+    source: string | null;
+    collection: string | null;
+    language: string | null;
+    date: string | null;
+    volume: number | null;
+    author: string | null;
+    notes: string | null;
+  };
+  pages: {
+    page: number;
+    text: string;
+  }[];
 };
+
+export type OcrIngestResponse = {
+  document_id: string;
+  status: string;
+  passage_count: number;
+  duplicate: boolean;
+};
+
+export type OcrWorkflowStep =
+  | 'upload'
+  | 'processing'
+  | 'review'
+  | 'metadata'
+  | 'final-preview'
+  | 'success';
