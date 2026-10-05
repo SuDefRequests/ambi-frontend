@@ -361,7 +361,7 @@ export default function AskArchivePage() {
                                 Searching the archive…
                             </h2>
 
-                            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#827363]">
+                            <p className="mx-auto mt-2 max-w-md text-center text-sm leading-6 text-[#827363]">
                                 Finding relevant passages and building an
                                 evidence-grounded response.
                             </p>
